@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://cjcpy00yl4yxl"]
+[gd_scene load_steps=16 format=4 uid="uid://cjcpy00yl4yxl"]
 
 [ext_resource type="Shader" path="res://world/tilemap.gdshader" id="1_3fehk"]
 [ext_resource type="Texture2D" uid="uid://c8gbdonv5cil5" path="res://icon.svg" id="1_312bn"]
+[ext_resource type="Script" path="res://world/particles.gd" id="1_ba383"]
 [ext_resource type="Script" path="res://world/main_cam.gd" id="1_tupyf"]
 [ext_resource type="PackedScene" uid="uid://civceraf4f46x" path="res://player/player.tscn" id="2_sfjuc"]
 
@@ -64,7 +65,7 @@ offset_right = 1273.0
 offset_bottom = 759.0
 color = Color(0.100299, 0.511055, 0.133336, 1)
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="Particles" type="CPUParticles2D" parent="."]
 modulate = Color(1, 1, 1, 0.129412)
 material = SubResource("CanvasItemMaterial_f8o1g")
 position = Vector2(576, 21)
@@ -81,8 +82,11 @@ initial_velocity_min = 25.0
 initial_velocity_max = 30.0
 angular_velocity_min = 30.0
 angular_velocity_max = 120.0
+tangential_accel_min = -0.2
+tangential_accel_max = 0.2
 angle_min = -720.0
 angle_max = 720.0
+script = ExtResource("1_ba383")
 
 [node name="MainCam" type="Camera2D" parent="."]
 position = Vector2(576, 324)
@@ -113,7 +117,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAQABAAEAAAAAAAEAAQABAAEAAAAAAAIAAQABAAE
 tile_set = SubResource("TileSet_oocob")
 
 [node name="Player" parent="." instance=ExtResource("2_sfjuc")]
-position = Vector2(164, 278)
+position = Vector2(164, 351)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c6cwo")

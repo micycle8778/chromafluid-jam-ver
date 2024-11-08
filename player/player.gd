@@ -19,12 +19,32 @@ enum State {
 
 var state := State.DEFAULT:
 	set(v):
+		_exit_state(state)
 		state = v
-		match state:
-			State.SLAM:
-				slam_force = 0
-			_:
-				pass
+		_enter_state(state)
+
+var particles_tween: Tween
+
+const SLAM_PARTICLE_SPEED = 5.
+
+func _exit_state(s: State) -> void:
+	match s:
+		State.SLAM:
+			if particles_tween != null: particles_tween.stop()
+			Particles.instance.speed_scale = SLAM_PARTICLE_SPEED
+			particles_tween = create_tween()
+			particles_tween.tween_property(Particles.instance, "speed_scale", 1., 0.4)
+
+func _enter_state(s: State) -> void:
+	match s:
+		State.SLAM:
+			slam_force = 0
+			if particles_tween != null: particles_tween.stop()
+			particles_tween = create_tween()
+			particles_tween.tween_property(Particles.instance, "speed_scale", SLAM_PARTICLE_SPEED, 0.1)
+		_:
+			pass
+
 
 func wall_jump(dir: float) -> void:
 	velocity.x += 1000. * dir
@@ -89,7 +109,7 @@ func _process_default(delta: float) -> void:
 
 	move_and_slide()
 
-	if Input.is_action_just_pressed("slam"):
+	if Input.is_action_just_pressed("slam") and not is_on_floor():
 		state = State.SLAM
 
 func _physics_process(delta: float) -> void:

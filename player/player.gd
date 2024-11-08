@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 const AIR_FRICTION := 0.05
 const MAX_SPEED := 900.
@@ -6,11 +6,21 @@ const JUMP_POWER := 950.
 const GRAVITY := 2700.
 
 const MOVE_ACCEL := 0.15
+
+static var instance: Player
+
 var acceleration := MOVE_ACCEL
 var tween: Tween
 
 @onready var left_jump_detector: Area2D = %LeftJumpDetector
 @onready var right_jump_detector: Area2D = %RightJumpDetector
+
+var projectile_scene: PackedScene = preload("player_projectile/player_projectile.tscn")
+
+var ammo = {
+	true: 3,
+	false: 3
+}
 
 enum State {
 	DEFAULT,
@@ -45,6 +55,8 @@ func _enter_state(s: State) -> void:
 		_:
 			pass
 
+func _init() -> void:
+	instance = self
 
 func wall_jump(dir: float) -> void:
 	velocity.x += 1000. * dir
@@ -54,8 +66,8 @@ func wall_jump(dir: float) -> void:
 	tween = create_tween()
 	tween.tween_property(self, "acceleration", MOVE_ACCEL, 0.15)
 
-var visibility := true
 var slam_force := 0.
+
 func _process_slam(delta: float) -> void:
 	velocity.x = 0
 	# print("[player::slam] velocity = ", velocity)
@@ -72,16 +84,27 @@ func _process_slam(delta: float) -> void:
 		velocity.y = -1500
 
 		if slam_force > 1500:
-			visibility = not visibility
-			for n in get_tree().get_nodes_in_group("other_worldly"):
-				n.visible = visibility
-			for n in get_tree().get_nodes_in_group("alt_worldly"):
-				n.visible = not visibility
-
+			World.instance.swap_worlds()
 			MainCam.instance.shake(0.1, Vector2.UP * 1.5)
 
+func get_aim() -> Vector2:
+	if ControllerManager.is_controller:
+		return ControllerManager.get_joystick_aim()
+	else:
+		return global_position.direction_to(get_global_mouse_position())
+
 func _process_default(delta: float) -> void:
-	# var input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if Input.is_action_just_pressed("fire") and ammo[World.instance.otherness] > 0:
+		var scene: Node2D = get_tree().current_scene
+		var projectile: PlayerProjectile = projectile_scene.instantiate()
+
+		projectile.position = scene.to_local(global_position)
+		projectile.rotation = get_aim().angle()
+		projectile.setup(get_aim() * 2000.)
+
+		scene.add_child(projectile)
+		ammo[World.instance.otherness] -= 1
+
 	var input := Input.get_axis("move_left", "move_right")
 	
 	if input == 0. and not is_on_floor():
@@ -103,7 +126,9 @@ func _process_default(delta: float) -> void:
 			wall_jumped = true
 
 		if wall_jumped or is_on_floor():
+			velocity.y = min(0, velocity.y)
 			velocity += Vector2.UP * JUMP_POWER
+
 	else:
 		velocity += Vector2.DOWN * GRAVITY * delta
 

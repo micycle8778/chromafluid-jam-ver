@@ -1,0 +1,152 @@
+[gd_scene load_steps=15 format=3 uid="uid://dlntnpch603u4"]
+
+[ext_resource type="Script" path="res://player/player_projectile/player_explosion.gd" id="1_7if4s"]
+[ext_resource type="Shader" path="res://player/player_projectile/player_explosion.gdshader" id="2_t2t30"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tdbd3"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_kki0h"]
+offsets = PackedFloat32Array(0.521583, 0.597403, 0.676259)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qrbej"]
+gradient = SubResource("Gradient_kki0h")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qr0fk"]
+radius = 128.0
+
+[sub_resource type="Animation" id="Animation_ceb75"]
+resource_name = "explosion"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.25),
+"transitions": PackedFloat32Array(0.287175, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.560955, 0.560955, 0.560955, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpeedLines:material:shader_parameter/decay")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.6]
+}
+
+[sub_resource type="Animation" id="Animation_402d8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpeedLines:material:shader_parameter/decay")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_852iy"]
+_data = {
+"RESET": SubResource("Animation_402d8"),
+"explosion": SubResource("Animation_ceb75")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_psjxs"]
+seed = 10
+frequency = 0.0162
+fractal_octaves = 10
+fractal_lacunarity = 5.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gk5oh"]
+noise = SubResource("FastNoiseLite_psjxs")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya3l0"]
+shader = ExtResource("2_t2t30")
+shader_parameter/base_color = Color(0.486275, 0.482353, 0, 1)
+shader_parameter/decay = 0.0
+shader_parameter/noise = SubResource("NoiseTexture2D_gk5oh")
+
+[sub_resource type="Gradient" id="Gradient_fu4vx"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6n2cb"]
+gradient = SubResource("Gradient_fu4vx")
+width = 300
+height = 300
+
+[node name="PlayerExplosion" type="Sprite2D"]
+self_modulate = Color(0.486275, 0.482353, 0, 1)
+z_index = 70
+material = SubResource("CanvasItemMaterial_tdbd3")
+texture = SubResource("GradientTexture2D_qrbej")
+script = ExtResource("1_7if4s")
+
+[node name="EnemyHurter" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHurter"]
+shape = SubResource("CircleShape2D_qr0fk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_852iy")
+}
+autoplay = "explosion"
+
+[node name="SpeedLines" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ya3l0")
+texture = SubResource("GradientTexture2D_6n2cb")

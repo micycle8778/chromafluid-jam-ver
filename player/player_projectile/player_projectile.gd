@@ -9,18 +9,22 @@ var was_setup := false
 @onready var explosive_sprite: Sprite2D = %ExplosiveSprite
 @onready var trail_particles: CPUParticles2D = %TrailParticles
 @onready var player_detector: Area2D = %PlayerDetector
+@onready var light: PointLight2D = %PointLight2D
 
 var explosion_scene: PackedScene = preload("player_explosion.tscn")
 
 func _on_world_swapping(o: bool) -> void:
-	if otherness == o:
-		queue_free()
-
 	bullet_sprite.visible = false
-	explosive_sprite.visible = otherness != o
-	player_detector.monitoring = otherness != o
+	player_detector.monitoring = true
+	light.visible = otherness != o
+	explosive_sprite.visible = true
 
 	velocity = Vector2.ZERO
+
+	if otherness == o:
+		await get_tree().physics_frame
+		queue_free()
+
 
 func setup(new_velocity: Vector2) -> void:
 	velocity = new_velocity
@@ -50,13 +54,16 @@ func _exit_tree() -> void:
 func _on_player_detector_body_entered(body: Node2D) -> void:
 	var player := body as Player
 	if player:
+		print("[player_projectile] exploding!")
 		var scene: Node2D = get_tree().current_scene
 		var explosion: PlayerExplosion = explosion_scene.instantiate()
 		explosion.position = scene.to_local(global_position)
 		scene.add_child(explosion)
 
 		# TODO: explosion on the ground don't push the player enough
+		var from_player := global_position.direction_to(player.global_position)
+		MainCam.instance.shake(0.2, from_player * 2)
 		player.velocity.y = 0
-		player.velocity += global_position.direction_to(player.global_position) * 1750.
+		player.velocity += from_player * 1750.
 		queue_free()
 

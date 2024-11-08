@@ -100,6 +100,7 @@ angle_max = 203.6
 color_ramp = SubResource("Gradient_kk2xp")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+unique_name_in_owner = true
 color = Color(1, 1, 0.278431, 1)
 energy = 0.6
 texture = ExtResource("1_egii5")

@@ -83,9 +83,8 @@ func _process_slam(delta: float) -> void:
 
 		velocity.y = -1500
 
-		if slam_force > 1500:
-			World.instance.swap_worlds()
-			MainCam.instance.shake(0.1, Vector2.UP * 1.5)
+		World.instance.swap_worlds()
+		MainCam.instance.shake(0.1, Vector2.UP * 1.5)
 
 func get_aim() -> Vector2:
 	if ControllerManager.is_controller:

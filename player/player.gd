@@ -11,17 +11,18 @@ static var instance: Player
 
 var acceleration := MOVE_ACCEL
 var tween: Tween
-
-@onready var left_jump_detector: Area2D = %LeftJumpDetector
-@onready var right_jump_detector: Area2D = %RightJumpDetector
-@onready var sprite: Sprite2D = %Sprite
-
 var projectile_scene: PackedScene = preload("player_projectile/player_projectile.tscn")
+var keys: Array[Key] = []
+var slam_force := 0.
 
 var ammo = {
 	true: 3,
 	false: 3
 }
+
+@onready var left_jump_detector: Area2D = %LeftJumpDetector
+@onready var right_jump_detector: Area2D = %RightJumpDetector
+@onready var sprite: Sprite2D = %Sprite
 
 enum State {
 	DEFAULT,
@@ -56,18 +57,24 @@ func _enter_state(s: State) -> void:
 		_:
 			pass
 
+func use_key() -> bool:
+	if keys.is_empty():
+		return false
+
+	keys.pop_back().consume()
+
+	return true
+
 func _init() -> void:
 	instance = self
 
-func wall_jump(dir: float) -> void:
+func _wall_jump(dir: float) -> void:
 	velocity.x += 1000. * dir
 
 	if tween != null: tween.stop()
 	acceleration = 0.
 	tween = create_tween()
 	tween.tween_property(self, "acceleration", MOVE_ACCEL, 0.15)
-
-var slam_force := 0.
 
 func _process_slam(delta: float) -> void:
 	velocity.x = 0
@@ -117,12 +124,12 @@ func _process_default(delta: float) -> void:
 
 		if left_jump_detector.has_overlapping_bodies():
 			# print("[player::default] wall jumping left")
-			wall_jump(1)
+			_wall_jump(1)
 			wall_jumped = true
 
 		if right_jump_detector.has_overlapping_bodies():
 			# print("[player::default] wall jumping right")
-			wall_jump(-1)
+			_wall_jump(-1)
 			wall_jumped = true
 
 		if wall_jumped or is_on_floor():

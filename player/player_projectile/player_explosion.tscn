@@ -148,11 +148,11 @@ material = SubResource("CanvasItemMaterial_tdbd3")
 texture = SubResource("GradientTexture2D_qrbej")
 script = ExtResource("1_7if4s")
 
-[node name="EnemyHurter" type="Area2D" parent="."]
+[node name="AOE" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 16777215
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHurter"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AOE"]
 shape = SubResource("CircleShape2D_qr0fk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -164,3 +164,6 @@ autoplay = "explosion"
 [node name="SpeedLines" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ya3l0")
 texture = SubResource("GradientTexture2D_6n2cb")
+
+[connection signal="area_entered" from="AOE" to="." method="_on_aoe_area_entered"]
+[connection signal="body_entered" from="AOE" to="." method="_on_aoe_body_entered"]

@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://wxdkhhk22jle"]
+
+[ext_resource type="Script" path="res://world/destructible/destructible.gd" id="1_obfhm"]
+[ext_resource type="Texture2D" uid="uid://5t4cbuh3usdf" path="res://world/tilemap.png" id="2_qjtqq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt2bc"]
+atlas = ExtResource("2_qjtqq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="Gradient" id="Gradient_s1yq6"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qcxv6"]
+gradient = SubResource("Gradient_s1yq6")
+width = 16
+height = 16
+
+[sub_resource type="Gradient" id="Gradient_b2pir"]
+offsets = PackedFloat32Array(0.29562, 0.941606)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_skt6m"]
+size = Vector2(64, 64)
+
+[node name="Destructible" type="StaticBody2D" groups=["explodable"]]
+script = ExtResource("1_obfhm")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_kt2bc")
+offset = Vector2(8, 8)
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(16, 16)
+emitting = false
+amount = 4
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = SubResource("GradientTexture2D_qcxv6")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 32)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+angular_velocity_min = 150.0
+angular_velocity_max = 300.0
+angle_min = -720.0
+angle_max = 720.0
+color_ramp = SubResource("Gradient_b2pir")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_skt6m")

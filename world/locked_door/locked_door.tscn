@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cojfnifye3urd"]
+
+[ext_resource type="Script" path="res://world/locked_door/locked_door.gd" id="1_glkoy"]
+[ext_resource type="Texture2D" uid="uid://i5cef3c7a5ub" path="res://world/locked_door/locked_door.svg" id="1_lk4uu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wlqb8"]
+size = Vector2(64, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tjy1"]
+size = Vector2(96, 160)
+
+[node name="LockedDoor" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_glkoy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.333, 0.333)
+texture = ExtResource("1_lk4uu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wlqb8")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+shape = SubResource("RectangleShape2D_5tjy1")
+debug_color = Color(0, 0.646, 0.236, 0)
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

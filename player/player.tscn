@@ -74,6 +74,7 @@ texture = ExtResource("2_8yti1")
 texture_scale = 4.0
 
 [node name="AimLine" type="Line2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.458824)
 z_index = 5
 z_as_relative = false

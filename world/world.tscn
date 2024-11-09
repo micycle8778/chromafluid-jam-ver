@@ -42,7 +42,7 @@ sources/1 = SubResource("TileSetAtlasSource_5xndm")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4uns8"]
 shader = ExtResource("1_3fehk")
-shader_parameter/color = Color(0.09264, 0.32, 0.0416, 1)
+shader_parameter/color = Color(0.0352941, 0.266667, 0.176471, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sar7m"]
 noise_type = 0
@@ -67,7 +67,7 @@ color = Color(0.1005, 0.242875, 0.67, 1)
 [node name="AltWorld2" type="ColorRect" parent="Backgrounds" groups=["alt_worldly"]]
 offset_right = 1273.0
 offset_bottom = 759.0
-color = Color(0.100299, 0.511055, 0.133336, 1)
+color = Color(0.0969, 0.51, 0.22083, 1)
 
 [node name="Particles" type="CPUParticles2D" parent="."]
 modulate = Color(1, 1, 1, 0.129412)

@@ -14,6 +14,7 @@ var tween: Tween
 
 @onready var left_jump_detector: Area2D = %LeftJumpDetector
 @onready var right_jump_detector: Area2D = %RightJumpDetector
+@onready var sprite: Sprite2D = %Sprite
 
 var projectile_scene: PackedScene = preload("player_projectile/player_projectile.tscn")
 
@@ -144,3 +145,5 @@ func _physics_process(delta: float) -> void:
 			_process_slam(delta)
 		_:
 			assert(false, "unreachable")
+
+	# sprite.scale = Vector2.ONE + (velocity / 100.)

@@ -52,6 +52,7 @@ fractal_weighted_strength = 1.0
 [sub_resource type="Environment" id="Environment_c6cwo"]
 glow_enabled = true
 glow_bloom = 0.2
+glow_hdr_threshold = 0.0
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_t23sk")

@@ -50,7 +50,6 @@ func _process(delta: float) -> void:
 func _exit_tree() -> void:
 	Player.instance.ammo[otherness] += 1
 
-
 func _on_player_detector_body_entered(body: Node2D) -> void:
 	var player := body as Player
 	if player:
@@ -58,12 +57,11 @@ func _on_player_detector_body_entered(body: Node2D) -> void:
 		var scene: Node2D = get_tree().current_scene
 		var explosion: PlayerExplosion = explosion_scene.instantiate()
 		explosion.position = scene.to_local(global_position)
-		scene.add_child(explosion)
+		scene.add_child.call_deferred(explosion)
 
 		# TODO: explosion on the ground don't push the player enough
 		var from_player := global_position.direction_to(player.global_position)
 		MainCam.instance.shake(0.2, from_player * 2)
-		player.velocity.y = 0
-		player.velocity += from_player * 1750.
+		player.velocity = from_player * 1750.
 		queue_free()
 

@@ -8,7 +8,7 @@ func _process(_delta: float) -> void:
 	if not visible:
 		return
 
-	ray_cast.target_position = aim * 1000000
+	ray_cast.target_position = aim * 10000
 	ray_cast.force_raycast_update()
 	var hit = to_local(ray_cast.get_collision_point()) if ray_cast.is_colliding() else ray_cast.target_position
 	points = PackedVector2Array([Vector2.ZERO, hit])

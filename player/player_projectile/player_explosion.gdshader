@@ -17,10 +17,10 @@ void fragment() {
 	float l = length(UV - vec2(0.5));
 	
 	float t = texture(noise, vec2(uv.y)).x;
-	COLOR.rgba *= vec4(t - mix(0., 1.4, l));
+	COLOR.rgba = vec4(t - mix(0., 1.4, l));
 	COLOR.rgb = mix(base_color * 2.5, vec3(-0.2), 1. - t);
 	COLOR.a *= 5.;
 	
-	COLOR.a *= step(l, 0.5);
+	//COLOR.a *= step(l, 0.5);
 	COLOR.a *= smoothstep(decay, decay + 0.005, l);
 }

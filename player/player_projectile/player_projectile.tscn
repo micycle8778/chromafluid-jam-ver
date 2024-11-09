@@ -62,7 +62,6 @@ script = ExtResource("1_8qgvx")
 
 [node name="TrailParticles" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
-visible = false
 modulate = Color(1, 1, 1, 0.764706)
 position = Vector2(-10, 0)
 lifetime = 0.35

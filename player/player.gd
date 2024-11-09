@@ -9,6 +9,8 @@ const MOVE_ACCEL := 0.15
 
 static var instance: Player
 
+@export var animated := false
+
 var acceleration := MOVE_ACCEL
 var tween: Tween
 var projectile_scene: PackedScene = preload("player_projectile/player_projectile.tscn")
@@ -28,7 +30,7 @@ var ammo = {
 
 enum State {
 	DEFAULT,
-	SLAM
+	SLAM,
 }
 
 var state := State.DEFAULT:
@@ -150,6 +152,8 @@ func _process_default(delta: float) -> void:
 		state = State.SLAM
 
 func _physics_process(delta: float) -> void:
+	if animated: return
+
 	match state:
 		State.DEFAULT:
 			_process_default(delta)
@@ -157,5 +161,3 @@ func _physics_process(delta: float) -> void:
 			_process_slam(delta)
 		_:
 			assert(false, "unreachable")
-
-	# sprite.scale = Vector2.ONE + (velocity / 100.)

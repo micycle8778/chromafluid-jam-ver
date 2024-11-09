@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cjcpy00yl4yxl"]
+[gd_scene load_steps=20 format=4 uid="uid://cjcpy00yl4yxl"]
 
 [ext_resource type="Script" path="res://world/particles.gd" id="1_ba383"]
 [ext_resource type="Script" path="res://world/world.gd" id="1_t23sk"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://wxdkhhk22jle" path="res://world/destructible/destructible.tscn" id="4_gh01e"]
 [ext_resource type="PackedScene" uid="uid://ct0k86rxllphn" path="res://world/key/key.tscn" id="7_emnym"]
 [ext_resource type="PackedScene" uid="uid://cojfnifye3urd" path="res://world/locked_door/locked_door.tscn" id="8_cvi8l"]
+[ext_resource type="Script" path="res://world/fps_label.gd" id="9_ao1u8"]
+[ext_resource type="PackedScene" uid="uid://d7i3vyw3rolu" path="res://world/transition_area/transition_area.tscn" id="10_lebkq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f8o1g"]
 blend_mode = 1
@@ -68,6 +70,7 @@ offset_bottom = 759.0
 color = Color(0.0969, 0.51, 0.22083, 1)
 
 [node name="Particles" type="CPUParticles2D" parent="."]
+process_mode = 3
 modulate = Color(1, 1, 1, 0.129412)
 z_index = 5
 material = SubResource("CanvasItemMaterial_f8o1g")
@@ -109,6 +112,9 @@ tile_set = SubResource("TileSet_oocob")
 [node name="LockedDoor" parent="TileMaps/Misc" instance=ExtResource("8_cvi8l")]
 position = Vector2(992, 192)
 
+[node name="Key" parent="TileMaps/Misc" instance=ExtResource("7_emnym")]
+position = Vector2(1040, 480)
+
 [node name="MainCam" type="Camera2D" parent="."]
 position = Vector2(576, 324)
 drag_left_margin = 0.7
@@ -118,10 +124,7 @@ drag_bottom_margin = 0.7
 script = ExtResource("1_tupyf")
 shake_noise = SubResource("FastNoiseLite_sar7m")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -128
-
-[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.838897, 0.838897, 0.838897, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_sfjuc")]
@@ -130,5 +133,18 @@ position = Vector2(164, 351)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c6cwo")
 
-[node name="Key" parent="." instance=ExtResource("7_emnym")]
-position = Vector2(1040, 480)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FPSLabel" type="Label" parent="CanvasLayer"]
+process_mode = 3
+offset_left = 1047.0
+offset_top = 609.0
+offset_right = 1138.0
+offset_bottom = 637.0
+theme_override_font_sizes/font_size = 20
+text = "FPS: 6969"
+script = ExtResource("9_ao1u8")
+
+[node name="TransitionArea" parent="." instance=ExtResource("10_lebkq")]
+position = Vector2(1120, 192)
+target_scene = "uid://cjcpy00yl4yxl"

@@ -57,7 +57,7 @@ func unstuck_player() -> void:
 				print("[world] moving player to ", p)
 				Player.instance.global_position = p
 				return
-	print("[world] double fuck")
+	push_error("[world] double fuck")
 
 func swap_worlds() -> void:
 	otherness = not otherness

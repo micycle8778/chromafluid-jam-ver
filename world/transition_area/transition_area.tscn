@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://d7i3vyw3rolu"]
+
+[ext_resource type="Script" path="res://world/transition_area/transition_area.gd" id="1_g101h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2r4a"]
+size = Vector2(64, 128)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t3x1l"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_205yg"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nq7f4"]
+gradient = SubResource("Gradient_205yg")
+height = 128
+
+[node name="TransitionArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_g101h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(96, 0)
+shape = SubResource("RectangleShape2D_v2r4a")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.4)
+material = SubResource("CanvasItemMaterial_t3x1l")
+texture = SubResource("GradientTexture2D_nq7f4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

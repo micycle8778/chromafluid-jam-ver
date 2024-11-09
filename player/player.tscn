@@ -89,3 +89,5 @@ texture_mode = 1
 script = ExtResource("3_xnutm")
 
 [node name="RayCast2D" type="RayCast2D" parent="AimLine"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

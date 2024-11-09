@@ -15,6 +15,8 @@ var projectile_scene: PackedScene = preload("player_projectile/player_projectile
 var keys: Array[Key] = []
 var slam_force := 0.
 
+var shape: Shape2D 
+
 var ammo = {
 	true: 3,
 	false: 3
@@ -67,6 +69,9 @@ func use_key() -> bool:
 
 func _init() -> void:
 	instance = self
+
+func _ready() -> void:
+	shape = %CollisionShape2D.shape
 
 func _wall_jump(dir: float) -> void:
 	velocity.x += 1000. * dir

@@ -6,6 +6,7 @@
 blend_mode = 2
 
 [sub_resource type="Gradient" id="Gradient_y7rpr"]
+offsets = PackedFloat32Array(0, 0.571942)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sbj1o"]
 gradient = SubResource("Gradient_y7rpr")

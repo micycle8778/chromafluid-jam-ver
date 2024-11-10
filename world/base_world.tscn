@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnjbxkpacy1t5"]
+[gd_scene load_steps=17 format=3 uid="uid://cnjbxkpacy1t5"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_hiyfx"]
 [ext_resource type="PackedScene" uid="uid://dq7wmpggpd43a" path="res://world/killzone/killzone.tscn" id="3_5hqik"]
@@ -48,11 +48,6 @@ point_count = 1
 noise_type = 0
 frequency = 1.0
 fractal_weighted_strength = 1.0
-
-[sub_resource type="Environment" id="Environment_c6cwo"]
-glow_enabled = true
-glow_bloom = 0.2
-glow_hdr_threshold = 0.0
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_hiyfx")
@@ -112,9 +107,6 @@ color = Color(0.838897, 0.838897, 0.838897, 1)
 
 [node name="Player" parent="." instance=ExtResource("8_kee36")]
 position = Vector2(164, 351)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_c6cwo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

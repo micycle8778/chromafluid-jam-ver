@@ -106,6 +106,7 @@ texture = ExtResource("1_egii5")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true
+collision_mask = 17
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 unique_name_in_owner = true

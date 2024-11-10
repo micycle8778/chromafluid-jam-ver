@@ -33,4 +33,6 @@ func _on_body_entered(body:Node2D) -> void:
 	var player: Player = body
 	if player:
 		assert(instant) # TODO:
+		if Player.instance != null:
+			Player.instance.visible = false
 		ScreenTransition.change_scene_to_file(target_scene)

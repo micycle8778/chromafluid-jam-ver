@@ -30,7 +30,7 @@ func is_safe_for_player(gp: Vector2) -> bool:
 	var space_state := get_world_2d().direct_space_state
 	var query := PhysicsShapeQueryParameters2D.new()
 	query.transform = Transform2D(0., gp)
-	query.collision_mask = Player.instance.collision_mask
+	query.collision_mask = 1
 	query.shape_rid = Player.instance.shape.get_rid()
 
 	var results = space_state.intersect_shape(query)

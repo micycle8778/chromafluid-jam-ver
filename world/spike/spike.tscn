@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5kpl5earipvd"]
+
+[ext_resource type="Script" path="res://world/spike/spike.gd" id="1_wfr5n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwx7n"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nc4vx"]
+size = Vector2(32, 29)
+
+[node name="Spike" type="Node2D"]
+script = ExtResource("1_wfr5n")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+collision_priority = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+shape = SubResource("RectangleShape2D_pwx7n")
+debug_color = Color(0.997962, 0, 0.153889, 0.42)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_nc4vx")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+antialiased = true
+polygon = PackedVector2Array(-16, 16, 16, 16, 0, -16)
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]

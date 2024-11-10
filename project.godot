@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 ControllerManager="*res://controller_manager.gd"
 ScreenTransition="*res://screen_transition/screen_transition.tscn"
 Snow="*res://world/snow/snow.tscn"
+TimeKeeper="*res://time_keeper.gd"
 
 [display]
 
@@ -105,6 +106,7 @@ aim_right={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="PlayerProjectile"
+2d_physics/layer_5="Destructable"
 
 [physics]
 

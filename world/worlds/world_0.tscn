@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://bc2g5tcrqoe70"]
+[gd_scene load_steps=6 format=4 uid="uid://bc2g5tcrqoe70"]
 
 [ext_resource type="PackedScene" uid="uid://cnjbxkpacy1t5" path="res://world/base_world.tscn" id="1_3jwn0"]
 [ext_resource type="PackedScene" uid="uid://d7i3vyw3rolu" path="res://world/transition_area/transition_area.tscn" id="2_nvmt3"]
 [ext_resource type="PackedScene" uid="uid://cgrupq2klxo42" path="res://world/tutorial_label/tutorial_label.tscn" id="3_uwovd"]
+[ext_resource type="Script" path="res://world/time_keeper_starter.gd" id="4_ycd3j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cy4un"]
 size = Vector2(465, 154)
@@ -46,6 +47,9 @@ position = Vector2(84, 576)
 
 [node name="Label" parent="WorldTitle" index="0"]
 text = "Humble Beginnings"
+
+[node name="TimeKeeperStarter" type="Node" parent="." index="7"]
+script = ExtResource("4_ycd3j")
 
 [editable path="TileMaps/Misc/TutorialLabel"]
 [editable path="TileMaps/Misc/TutorialLabel2"]

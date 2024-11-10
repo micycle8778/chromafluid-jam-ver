@@ -7,22 +7,29 @@ const GRAVITY := 2700.
 
 const MOVE_ACCEL := 0.15
 
+const HEAT_SPEED := 1.5
+const HEAL_SPEED := 0.3
+
 static var instance: Player
 
 @export var animated := false
+@export var hot_color := Color.RED
 
 var acceleration := MOVE_ACCEL
 var tween: Tween
 var projectile_scene: PackedScene = preload("player_projectile/player_projectile.tscn")
 var keys: Array[Key] = []
 var slam_force := 0.
-
 var shape: Shape2D 
-
+var heaters: int = 0:
+	set(v):
+		assert(v >= 0)
+		heaters = v
 var ammo = {
 	true: 3,
 	false: 3
 }
+var health := 1.0
 
 @onready var left_jump_detector: Area2D = %LeftJumpDetector
 @onready var right_jump_detector: Area2D = %RightJumpDetector
@@ -130,12 +137,12 @@ func _process_default(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		var wall_jumped := false
 
-		if left_jump_detector.has_overlapping_bodies():
+		if left_jump_detector.has_overlapping_bodies() and not is_on_floor():
 			# print("[player::default] wall jumping left")
 			_wall_jump(1)
 			wall_jumped = true
 
-		if right_jump_detector.has_overlapping_bodies():
+		if right_jump_detector.has_overlapping_bodies() and not is_on_floor():
 			# print("[player::default] wall jumping right")
 			_wall_jump(-1)
 			wall_jumped = true
@@ -163,16 +170,27 @@ func _physics_process(delta: float) -> void:
 		_:
 			assert(false, "unreachable")
 
-var killed := false
+func _process(delta: float) -> void:
+	if heaters > 0:
+		health = move_toward(health, 0.0, HEAT_SPEED * delta)
+	else:
+		health = move_toward(health, 1.0, HEAL_SPEED * delta)
+	
+	modulate = hot_color.lerp(Color.WHITE, health)
+	if health == 0.:
+		kill()
+
+var was_killed := false
 func kill() -> void:
-	if killed: return
-	killed = true
+	if was_killed: return
+	was_killed = true
 
 	sprite.visible = false
 
 	var gp := death_particles.global_position
 	remove_child(death_particles)
 	death_particles.position = get_tree().current_scene.to_local(gp)
+	death_particles.modulate = modulate
 	get_tree().current_scene.add_child(death_particles)
 	death_particles.emitting = true
 

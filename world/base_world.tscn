@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cnjbxkpacy1t5"]
+[gd_scene load_steps=18 format=3 uid="uid://cnjbxkpacy1t5"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_hiyfx"]
 [ext_resource type="PackedScene" uid="uid://dq7wmpggpd43a" path="res://world/killzone/killzone.tscn" id="3_5hqik"]
 [ext_resource type="Texture2D" uid="uid://5t4cbuh3usdf" path="res://world/tilemap.png" id="3_tjwbh"]
 [ext_resource type="PackedScene" uid="uid://wxdkhhk22jle" path="res://world/destructible/destructible.tscn" id="4_rdmrg"]
+[ext_resource type="PackedScene" uid="uid://c5kpl5earipvd" path="res://world/spike/spike.tscn" id="5_k2eep"]
 [ext_resource type="Script" path="res://world/world_title.gd" id="7_hifmm"]
 [ext_resource type="Script" path="res://world/main_cam.gd" id="7_k3bf4"]
 [ext_resource type="Theme" uid="uid://blbkr05cg5kn2" path="res://theme.tres" id="7_rl8qs"]
@@ -29,6 +30,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4kboh"]
 scenes/1/scene = ExtResource("3_5hqik")
 scenes/2/scene = ExtResource("4_rdmrg")
+scenes/3/scene = ExtResource("5_k2eep")
 
 [sub_resource type="TileSet" id="TileSet_oocob"]
 tile_size = Vector2i(32, 32)
@@ -107,6 +109,7 @@ color = Color(0.838897, 0.838897, 0.838897, 1)
 
 [node name="Player" parent="." instance=ExtResource("8_kee36")]
 position = Vector2(164, 351)
+hot_color = Color(1, 0.290196, 0.290196, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

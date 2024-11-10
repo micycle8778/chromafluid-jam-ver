@@ -16,7 +16,7 @@ tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAA
 [node name="TransitionArea" parent="TileMaps/Misc" index="0" instance=ExtResource("2_3lr4b")]
 position = Vector2(32, 544)
 scale = Vector2(-1, 1)
-target_scene = "uid://dw6lnshn5kw11"
+target_scene = "uid://0reijolduolt"
 
 [node name="LockedDoor" parent="TileMaps/Misc" index="1" instance=ExtResource("3_2ni8q")]
 position = Vector2(128, 544)

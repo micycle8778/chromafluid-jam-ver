@@ -1,0 +1,97 @@
+[gd_scene load_steps=12 format=3 uid="uid://dwrlvedg205ps"]
+
+[ext_resource type="Script" path="res://world/heater/heater.gd" id="1_8fmsp"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4vel0"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_k5co5"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pvbht"]
+gradient = SubResource("Gradient_k5co5")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_kfobi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.461538), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_a3w6f"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1vf8s"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_o2utr"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0, 1, 0.454524, 0.454524, 0.454524, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2cfjy"]
+gradient = SubResource("Gradient_o2utr")
+width = 32
+height = 16
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6kmo5"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exrd5"]
+size = Vector2(32, 8)
+
+[node name="Heater" type="Node2D"]
+physics_interpolation_mode = 2
+modulate = Color(1, 0.290196, 0.290196, 1)
+script = ExtResource("1_8fmsp")
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+material = SubResource("CanvasItemMaterial_4vel0")
+position = Vector2(0, -8)
+emitting = false
+amount = 3
+lifetime = 0.75
+preprocess = 1.0
+texture = SubResource("GradientTexture2D_pvbht")
+emission_shape = 3
+emission_rect_extents = Vector2(12, 1)
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_kfobi")
+color_ramp = SubResource("Gradient_a3w6f")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_1vf8s")
+position = Vector2(0, -24)
+texture = SubResource("GradientTexture2D_2cfjy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_6kmo5")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_exrd5")
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]

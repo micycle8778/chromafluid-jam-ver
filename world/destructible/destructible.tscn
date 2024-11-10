@@ -24,6 +24,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 size = Vector2(64, 64)
 
 [node name="Destructible" type="StaticBody2D" groups=["explodable"]]
+collision_layer = 16
 script = ExtResource("1_obfhm")
 
 [node name="Sprite" type="Sprite2D" parent="."]

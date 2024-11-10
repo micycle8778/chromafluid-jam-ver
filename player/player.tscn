@@ -54,8 +54,9 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 physics_interpolation_mode = 1
 z_index = 100
 collision_layer = 2
-collision_mask = 5
+collision_mask = 21
 script = ExtResource("1_3dmiu")
+hot_color = Color(1, 0.290196, 0.290196, 1)
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -63,10 +64,12 @@ texture = SubResource("GradientTexture2D_6dqfl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
+visible = false
 shape = SubResource("RectangleShape2D_dfa7f")
 
 [node name="LeftJumpDetector" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftJumpDetector"]
@@ -76,6 +79,7 @@ debug_color = Color(0, 1, 0, 0)
 
 [node name="RightJumpDetector" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 position = Vector2(32, 0)
 collision_layer = 0
 
@@ -106,6 +110,7 @@ texture_mode = 1
 script = ExtResource("3_xnutm")
 
 [node name="RayCast2D" type="RayCast2D" parent="AimLine"]
+collision_mask = 17
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

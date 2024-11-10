@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://blbkr05cg5kn2"]
+
+[ext_resource type="FontFile" uid="uid://bijf23frk58at" path="res://Montserrat-Italic-VariableFont_wght.ttf" id="1_w6vr2"]
+
+[sub_resource type="FontVariation" id="FontVariation_rcphb"]
+base_font = ExtResource("1_w6vr2")
+variation_opentype = {
+2003265652: 300
+}
+
+[resource]
+Label/font_sizes/font_size = 20
+Label/fonts/font = SubResource("FontVariation_rcphb")

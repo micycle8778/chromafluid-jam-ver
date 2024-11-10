@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgrupq2klxo42"]
+
+[ext_resource type="Theme" uid="uid://blbkr05cg5kn2" path="res://theme.tres" id="1_53gve"]
+[ext_resource type="Script" path="res://world/tutorial_label/tutorial_label.gd" id="1_ad24m"]
+
+[node name="TutorialLabel" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ad24m")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 303.0
+offset_bottom = 26.0
+theme = ExtResource("1_53gve")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

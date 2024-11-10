@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=4 uid="uid://bc2g5tcrqoe70"]
+[gd_scene load_steps=5 format=4 uid="uid://bc2g5tcrqoe70"]
 
 [ext_resource type="PackedScene" uid="uid://cnjbxkpacy1t5" path="res://world/base_world.tscn" id="1_3jwn0"]
 [ext_resource type="PackedScene" uid="uid://d7i3vyw3rolu" path="res://world/transition_area/transition_area.tscn" id="2_nvmt3"]
+[ext_resource type="PackedScene" uid="uid://cgrupq2klxo42" path="res://world/tutorial_label/tutorial_label.tscn" id="3_uwovd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cy4un"]
+size = Vector2(465, 154)
 
 [node name="World" instance=ExtResource("1_3jwn0")]
 
@@ -15,5 +19,30 @@ tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAA
 position = Vector2(1120, 128)
 target_scene = "uid://cy05cbkmplreo"
 
+[node name="TutorialLabel" parent="TileMaps/Misc" index="1" instance=ExtResource("3_uwovd")]
+position = Vector2(100, 474)
+
+[node name="Label" parent="TileMaps/Misc/TutorialLabel" index="0"]
+text = "move with left stick or a/d keys"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMaps/Misc/TutorialLabel" index="1"]
+position = Vector2(130.5, 67)
+shape = SubResource("RectangleShape2D_cy4un")
+
+[node name="TutorialLabel2" parent="TileMaps/Misc" index="2" instance=ExtResource("3_uwovd")]
+position = Vector2(757, 469)
+
+[node name="Label" parent="TileMaps/Misc/TutorialLabel2" index="0"]
+offset_left = 61.0
+offset_right = 364.0
+text = "feel free to wall jump here"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMaps/Misc/TutorialLabel2" index="1"]
+position = Vector2(130.5, 67)
+shape = SubResource("RectangleShape2D_cy4un")
+
 [node name="Player" parent="." index="4"]
 position = Vector2(84, 576)
+
+[editable path="TileMaps/Misc/TutorialLabel"]
+[editable path="TileMaps/Misc/TutorialLabel2"]

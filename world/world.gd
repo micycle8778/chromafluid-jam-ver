@@ -11,7 +11,9 @@ class NodePair:
 		parent.remove_child(n)
 
 	func insert() -> void:
-		parent.add_child(node)
+		if node != null:
+			parent.add_child(node)
+			node.visible = true
 
 signal world_swapping(otherness: bool)
 
@@ -76,7 +78,6 @@ func enforce_worldness() -> void:
 
 	for np in node_pairs:
 		np.insert()
-		np.node.visible = true
 
 	node_pairs.clear()
 	for n in get_tree().get_nodes_in_group(bad_group):

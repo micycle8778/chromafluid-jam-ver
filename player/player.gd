@@ -161,3 +161,10 @@ func _physics_process(delta: float) -> void:
 			_process_slam(delta)
 		_:
 			assert(false, "unreachable")
+
+var killed := false
+func kill() -> void:
+	if killed: return
+	killed = true
+	# TODO: screenshake and death particles
+	ScreenTransition.change_scene_to_file(get_tree().current_scene.scene_file_path)

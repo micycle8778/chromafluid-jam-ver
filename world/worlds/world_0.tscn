@@ -44,5 +44,8 @@ shape = SubResource("RectangleShape2D_cy4un")
 [node name="Player" parent="." index="4"]
 position = Vector2(84, 576)
 
+[node name="Label" parent="WorldTitle" index="0"]
+text = "Humble Beginnings"
+
 [editable path="TileMaps/Misc/TutorialLabel"]
 [editable path="TileMaps/Misc/TutorialLabel2"]

@@ -6,14 +6,12 @@ var dead := false
 @onready var label: Label = %Label
 @onready var text := label.text
 
-func _on_world_swapping(_otherness: bool) -> void:
-	print("[tutorial_label] world swapping!")
+func _exit_tree() -> void:
 	if label.text != "":
 		queue_free()
 
 func _ready() -> void:
 	var tree := get_tree()
-	World.instance.world_swapping.connect(_on_world_swapping)
 
 	label.text = ""
 	await _player_entered

@@ -43,13 +43,16 @@ shape = SubResource("RectangleShape2D_5odqr")
 
 [node name="TransitionArea" parent="TileMaps/Misc" index="2" instance=ExtResource("2_ejubg")]
 position = Vector2(1120, 192)
-target_scene = "uid://cy05cbkmplreo"
+target_scene = "uid://b1tojpl73nlok"
 
 [node name="LockedDoor" parent="TileMaps/Misc" index="3" instance=ExtResource("2_d5m76")]
 position = Vector2(992, 192)
 
 [node name="Key" parent="TileMaps/Misc" index="4" instance=ExtResource("3_u8g0l")]
 position = Vector2(1040, 480)
+
+[node name="Label" parent="WorldTitle" index="0"]
+text = "Fragile Walls"
 
 [editable path="TileMaps/Misc/TutorialLabel"]
 [editable path="TileMaps/Misc/TutorialLabel2"]

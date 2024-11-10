@@ -1,9 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnjbxkpacy1t5"]
+[gd_scene load_steps=17 format=3 uid="uid://cnjbxkpacy1t5"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_hiyfx"]
+[ext_resource type="PackedScene" uid="uid://dq7wmpggpd43a" path="res://world/killzone/killzone.tscn" id="3_5hqik"]
 [ext_resource type="Texture2D" uid="uid://5t4cbuh3usdf" path="res://world/tilemap.png" id="3_tjwbh"]
 [ext_resource type="PackedScene" uid="uid://wxdkhhk22jle" path="res://world/destructible/destructible.tscn" id="4_rdmrg"]
+[ext_resource type="Script" path="res://world/world_title.gd" id="7_hifmm"]
 [ext_resource type="Script" path="res://world/main_cam.gd" id="7_k3bf4"]
+[ext_resource type="Theme" uid="uid://blbkr05cg5kn2" path="res://theme.tres" id="7_rl8qs"]
 [ext_resource type="PackedScene" uid="uid://civceraf4f46x" path="res://player/player.tscn" id="8_kee36"]
 [ext_resource type="Script" path="res://world/fps_label.gd" id="9_i1of3"]
 
@@ -18,6 +21,7 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4kboh"]
+scenes/1/scene = ExtResource("3_5hqik")
 scenes/2/scene = ExtResource("4_rdmrg")
 
 [sub_resource type="TileSet" id="TileSet_oocob"]
@@ -117,3 +121,18 @@ offset_bottom = 637.0
 theme_override_font_sizes/font_size = 20
 text = "FPS: 6969"
 script = ExtResource("9_i1of3")
+
+[node name="WorldTitle" type="CanvasLayer" parent="."]
+script = ExtResource("7_hifmm")
+
+[node name="Label" type="Label" parent="WorldTitle"]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 99.0
+offset_bottom = 122.0
+grow_horizontal = 2
+theme = ExtResource("7_rl8qs")
+theme_type_variation = &"world_title"
+text = "Unnamed World"
+horizontal_alignment = 1

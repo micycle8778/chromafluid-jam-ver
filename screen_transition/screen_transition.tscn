@@ -67,7 +67,7 @@ script = ExtResource("1_0rfce")
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_5ce6y")
 offset_right = 1152.0
-offset_bottom = 648.0
+offset_bottom = 658.0
 color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

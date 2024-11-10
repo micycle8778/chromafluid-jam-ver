@@ -47,9 +47,9 @@ func _exit_state(s: State) -> void:
 	match s:
 		State.SLAM:
 			if particles_tween != null: particles_tween.stop()
-			Particles.instance.speed_scale = SLAM_PARTICLE_SPEED
+			Snow.particles.speed_scale = SLAM_PARTICLE_SPEED
 			particles_tween = create_tween()
-			particles_tween.tween_property(Particles.instance, "speed_scale", 1., 0.4)
+			particles_tween.tween_property(Snow.particles, "speed_scale", 1., 0.4)
 
 func _enter_state(s: State) -> void:
 	match s:
@@ -57,7 +57,7 @@ func _enter_state(s: State) -> void:
 			slam_force = 0
 			if particles_tween != null: particles_tween.stop()
 			particles_tween = create_tween()
-			particles_tween.tween_property(Particles.instance, "speed_scale", SLAM_PARTICLE_SPEED, 0.1)
+			particles_tween.tween_property(Snow.particles, "speed_scale", SLAM_PARTICLE_SPEED, 0.1)
 		_:
 			pass
 

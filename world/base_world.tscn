@@ -1,0 +1,119 @@
+[gd_scene load_steps=14 format=3 uid="uid://cnjbxkpacy1t5"]
+
+[ext_resource type="Script" path="res://world/world.gd" id="1_hiyfx"]
+[ext_resource type="Texture2D" uid="uid://5t4cbuh3usdf" path="res://world/tilemap.png" id="3_tjwbh"]
+[ext_resource type="PackedScene" uid="uid://wxdkhhk22jle" path="res://world/destructible/destructible.tscn" id="4_rdmrg"]
+[ext_resource type="Script" path="res://world/main_cam.gd" id="7_k3bf4"]
+[ext_resource type="PackedScene" uid="uid://civceraf4f46x" path="res://player/player.tscn" id="8_kee36"]
+[ext_resource type="Script" path="res://world/fps_label.gd" id="9_i1of3"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sej4g"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_grybj"]
+texture = ExtResource("3_tjwbh")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_sej4g")
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4kboh"]
+scenes/2/scene = ExtResource("4_rdmrg")
+
+[sub_resource type="TileSet" id="TileSet_oocob"]
+tile_size = Vector2i(32, 32)
+occlusion_layer_0/light_mask = 1
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_grybj")
+sources/2 = SubResource("TileSetScenesCollectionSource_4kboh")
+
+[sub_resource type="Curve2D" id="Curve2D_xjnbo"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 576, 324)
+}
+point_count = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sar7m"]
+noise_type = 0
+frequency = 1.0
+fractal_weighted_strength = 1.0
+
+[sub_resource type="Environment" id="Environment_c6cwo"]
+glow_enabled = true
+glow_bloom = 0.2
+glow_hdr_threshold = 0.0
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_hiyfx")
+
+[node name="Backgrounds" type="Node2D" parent="."]
+
+[node name="TileMaps" type="Node2D" parent="."]
+z_index = 10
+
+[node name="OtherWorld" type="TileMapLayer" parent="TileMaps" groups=["other_worldly"]]
+modulate = Color(0.0392157, 0.156863, 0.341176, 1)
+tile_set = SubResource("TileSet_oocob")
+
+[node name="AltWorld" type="TileMapLayer" parent="TileMaps" groups=["alt_worldly"]]
+modulate = Color(0.0352941, 0.266667, 0.176471, 1)
+tile_set = SubResource("TileSet_oocob")
+
+[node name="Misc" type="Node2D" parent="TileMaps"]
+
+[node name="CameraPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_xjnbo")
+
+[node name="MainCam" type="Camera2D" parent="CameraPath"]
+physics_interpolation_mode = 2
+position = Vector2(576, 324)
+position_smoothing_enabled = true
+script = ExtResource("7_k3bf4")
+shake_noise = SubResource("FastNoiseLite_sar7m")
+
+[node name="OtherWorld2" type="ColorRect" parent="CameraPath/MainCam" groups=["other_worldly"]]
+z_index = -1
+z_as_relative = false
+offset_left = -1076.0
+offset_top = -824.0
+offset_right = 1171.0
+offset_bottom = 946.0
+color = Color(0.1005, 0.242875, 0.67, 1)
+metadata/_edit_lock_ = true
+
+[node name="AltWorld2" type="ColorRect" parent="CameraPath/MainCam" groups=["alt_worldly"]]
+z_index = -1
+z_as_relative = false
+offset_left = -1076.0
+offset_top = -824.0
+offset_right = 1197.0
+offset_bottom = 935.0
+color = Color(0.0969, 0.51, 0.22083, 1)
+metadata/_edit_lock_ = true
+
+[node name="TargetLine" type="Line2D" parent="CameraPath/MainCam"]
+unique_name_in_owner = true
+width = 3.0
+metadata/_edit_lock_ = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.838897, 0.838897, 0.838897, 1)
+
+[node name="Player" parent="." instance=ExtResource("8_kee36")]
+position = Vector2(164, 351)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c6cwo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FPSLabel" type="Label" parent="CanvasLayer"]
+process_mode = 3
+offset_left = 1047.0
+offset_top = 609.0
+offset_right = 1138.0
+offset_bottom = 637.0
+theme_override_font_sizes/font_size = 20
+text = "FPS: 6969"
+script = ExtResource("9_i1of3")

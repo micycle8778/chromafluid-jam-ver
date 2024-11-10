@@ -1,6 +1,5 @@
-[gd_scene load_steps=20 format=4 uid="uid://cjcpy00yl4yxl"]
+[gd_scene load_steps=19 format=4 uid="uid://cjcpy00yl4yxl"]
 
-[ext_resource type="Script" path="res://world/particles.gd" id="1_ba383"]
 [ext_resource type="Script" path="res://world/world.gd" id="1_t23sk"]
 [ext_resource type="Script" path="res://world/main_cam.gd" id="1_tupyf"]
 [ext_resource type="PackedScene" uid="uid://civceraf4f46x" path="res://player/player.tscn" id="2_sfjuc"]
@@ -92,7 +91,6 @@ tangential_accel_min = -0.2
 tangential_accel_max = 0.2
 angle_min = -720.0
 angle_max = 720.0
-script = ExtResource("1_ba383")
 
 [node name="TileMaps" type="Node2D" parent="."]
 z_index = 10

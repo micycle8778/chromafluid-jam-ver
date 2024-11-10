@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq7wmpggpd43a"]
+[gd_scene load_steps=6 format=3 uid="uid://dq7wmpggpd43a"]
 
 [ext_resource type="Script" path="res://world/killzone/killzone.gd" id="1_m2xvd"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kqjrd"]
+blend_mode = 2
+
 [sub_resource type="Gradient" id="Gradient_y7rpr"]
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sbj1o"]
 gradient = SubResource("Gradient_y7rpr")
@@ -19,6 +21,7 @@ size = Vector2(32, 32)
 script = ExtResource("1_m2xvd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_kqjrd")
 texture = SubResource("GradientTexture2D_sbj1o")
 offset = Vector2(0, -32)
 

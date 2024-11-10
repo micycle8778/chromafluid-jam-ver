@@ -15,12 +15,12 @@ vec2 polar_coordinates(vec2 uv, vec2 center, float zoom, float repeat) {
 void fragment() {
 	vec2 uv = polar_coordinates(UV, vec2(0.5), 1., 1.);
 	float l = length(UV - vec2(0.5));
-	
+
 	float t = texture(noise, vec2(uv.y)).x;
 	COLOR.rgba = vec4(t - mix(0., 1.4, l));
 	COLOR.rgb = mix(base_color * 2.5, vec3(-0.2), 1. - t);
 	COLOR.a *= 5.;
-	
+
 	//COLOR.a *= step(l, 0.5);
 	COLOR.a *= smoothstep(decay, decay + 0.005, l);
 }

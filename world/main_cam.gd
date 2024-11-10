@@ -12,6 +12,7 @@ func _init() -> void:
 
 var shake_time := 0.
 var shake_dir := Vector2.ZERO
+var shake_intensity := 1.
 
 @onready var parent := get_parent() as Path2D
 @onready var debug_line: Line2D = %TargetLine
@@ -28,10 +29,10 @@ func _process_shake(delta: float) -> void:
 	var shake_offset := Vector2.ZERO
 	if shake_time > 0.:
 		var t := shake_time * 100;
-		shake_offset = Vector2(
+		shake_offset = (Vector2(
 			shake_noise.get_noise_1d(t),
 			shake_noise.get_noise_1d(t + 1.)
-		) + shake_dir
+		) * shake_intensity) + shake_dir
 	else:
 		shake_offset = Vector2.ZERO
 	
@@ -73,6 +74,7 @@ func _process(delta: float) -> void:
 
 	debug_line.points = PackedVector2Array([Vector2.ZERO, to_local(desired_pos)])
 
-func shake(time: float, direction: Vector2 = Vector2.ZERO) -> void:
+func shake(time: float, direction: Vector2 = Vector2.ZERO, intensity: float = 1.) -> void:
 	shake_time = time
 	shake_dir = direction
+	shake_intensity = intensity

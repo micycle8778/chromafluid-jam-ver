@@ -27,6 +27,7 @@ var ammo = {
 @onready var left_jump_detector: Area2D = %LeftJumpDetector
 @onready var right_jump_detector: Area2D = %RightJumpDetector
 @onready var sprite: Sprite2D = %Sprite
+@onready var death_particles: CPUParticles2D = %DeathParticles
 
 enum State {
 	DEFAULT,
@@ -96,7 +97,7 @@ func _process_slam(delta: float) -> void:
 		# print("[player::slam] slam_force = ", slam_force)
 		state = State.DEFAULT
 
-		velocity.y = -1500
+		velocity.y = -1000
 
 		World.instance.swap_worlds()
 		MainCam.instance.shake(0.1, Vector2.UP * 1.5)
@@ -166,5 +167,16 @@ var killed := false
 func kill() -> void:
 	if killed: return
 	killed = true
-	# TODO: screenshake and death particles
+
+	sprite.visible = false
+
+	var gp := death_particles.global_position
+	remove_child(death_particles)
+	death_particles.position = get_tree().current_scene.to_local(gp)
+	get_tree().current_scene.add_child(death_particles)
+	death_particles.emitting = true
+
+	MainCam.instance.shake(0.3, Vector2.ZERO, 1.5)
+
+	await get_tree().create_timer(0.3).timeout
 	ScreenTransition.change_scene_to_file(get_tree().current_scene.scene_file_path)

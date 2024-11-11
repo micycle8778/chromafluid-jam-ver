@@ -19,6 +19,9 @@ tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAA
 [node name="Player" parent="." index="5"]
 position = Vector2(142, 572)
 
+[node name="CanvasLayer" parent="." index="6"]
+visible = false
+
 [node name="WorldTitle" parent="." index="7"]
 visible = false
 

@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://dmxav6wthcvfy"]
+[gd_scene load_steps=7 format=4 uid="uid://dmxav6wthcvfy"]
 
 [ext_resource type="PackedScene" uid="uid://cnjbxkpacy1t5" path="res://world/base_world.tscn" id="1_pl30q"]
 [ext_resource type="Theme" uid="uid://blbkr05cg5kn2" path="res://theme.tres" id="2_goqc5"]
 [ext_resource type="Shader" path="res://world/title_screen.gdshader" id="3_n5kjj"]
 [ext_resource type="FontFile" uid="uid://bijf23frk58at" path="res://Montserrat-Italic-VariableFont_wght.ttf" id="3_qu1ll"]
-[ext_resource type="Script" path="res://world/play_button.gd" id="5_mga48"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m1m7n"]
 shader = ExtResource("3_n5kjj")
@@ -58,24 +57,12 @@ theme_override_font_sizes/font_size = 96
 text = "chromafluid"
 horizontal_alignment = 2
 
-[node name="Title2" type="Label" parent="Menu/Control/CanvasGroup" index="1"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_right = 597.0
-offset_bottom = 118.0
-grow_horizontal = 2
-theme_override_fonts/font = SubResource("FontVariation_rootj")
-theme_override_font_sizes/font_size = 96
-text = "chromafluid"
-horizontal_alignment = 2
-
-[node name="PlayButton" type="Button" parent="Menu/Control" index="1"]
+[node name="Label" type="Label" parent="Menu/Control" index="1"]
 layout_mode = 0
-offset_left = 935.0
-offset_top = 497.0
-offset_right = 1072.0
-offset_bottom = 565.0
-text = " Play "
-script = ExtResource("5_mga48")
-
-[connection signal="pressed" from="Menu/Control/PlayButton" to="Menu/Control/PlayButton" method="_on_pressed"]
+offset_left = 920.0
+offset_top = 544.0
+offset_right = 1098.0
+offset_bottom = 599.0
+text = "Ctrl + T to start
+RB + Start to start"
+horizontal_alignment = 2

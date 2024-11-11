@@ -109,7 +109,6 @@ color = Color(0.838897, 0.838897, 0.838897, 1)
 
 [node name="Player" parent="." instance=ExtResource("8_kee36")]
 position = Vector2(164, 351)
-hot_color = Color(1, 0.290196, 0.290196, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

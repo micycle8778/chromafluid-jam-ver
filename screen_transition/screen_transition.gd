@@ -9,6 +9,9 @@ func _anim_execute_swap() -> void:
 	get_tree().paused = false
 	_filename = ""
 
+func reload_scene() -> void:
+	change_scene_to_file(get_tree().current_scene.scene_file_path)
+
 func change_scene_to_file(filename: String) -> void:
 	visible = true
 

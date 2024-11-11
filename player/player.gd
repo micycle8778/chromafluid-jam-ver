@@ -169,6 +169,14 @@ func _physics_process(delta: float) -> void:
 			_process_slam(delta)
 		_:
 			assert(false, "unreachable")
+	
+	if not was_killed:
+		if Input.is_action_just_pressed("restart_level"):
+			was_killed = true
+			ScreenTransition.reload_scene()
+		elif Input.is_action_just_pressed("restart_game") or (Input.is_action_pressed("start_button") and Input.is_action_pressed("right_bumper")):
+			was_killed = true
+			ScreenTransition.change_scene_to_file("uid://bc2g5tcrqoe70")
 
 func _process(delta: float) -> void:
 	if heaters > 0:
@@ -197,4 +205,4 @@ func kill() -> void:
 	MainCam.instance.shake(0.3, Vector2.ZERO, 1.5)
 
 	await get_tree().create_timer(0.3).timeout
-	ScreenTransition.change_scene_to_file(get_tree().current_scene.scene_file_path)
+	ScreenTransition.reload_scene()

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://t0hwoebv5ne6"]
+
+[ext_resource type="AudioStream" uid="uid://xfnwn53geylu" path="res://chromafluid.ogg" id="1_4c0d8"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_4c0d8")
+autoplay = true

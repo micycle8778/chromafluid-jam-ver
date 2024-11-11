@@ -21,6 +21,7 @@ ControllerManager="*res://controller_manager.gd"
 ScreenTransition="*res://screen_transition/screen_transition.tscn"
 Snow="*res://world/snow/snow.tscn"
 TimeKeeper="*res://time_keeper.gd"
+MusicPlayer="*res://music_player.tscn"
 
 [display]
 

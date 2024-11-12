@@ -61,3 +61,17 @@ theme = ExtResource("2_1uv3h")
 text = "Shift + T to restart
 RB + Start to restart"
 horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer2" index="3"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 368.0
+offset_top = 584.0
+offset_right = 566.0
+offset_bottom = 639.0
+grow_horizontal = 2
+theme = ExtResource("2_1uv3h")
+text = "v1.0.1"
+horizontal_alignment = 2
+vertical_alignment = 2

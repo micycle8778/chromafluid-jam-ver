@@ -58,6 +58,6 @@ offset_right = 66.0
 offset_bottom = 551.0
 grow_horizontal = 2
 theme = ExtResource("2_1uv3h")
-text = "Ctrl + T to restart
+text = "Shift + T to restart
 RB + Start to restart"
 horizontal_alignment = 1

@@ -2,6 +2,5 @@
 .godot/
 /android/
 
-.builds/
 .builds/**
 !.builds/.gitkeep
